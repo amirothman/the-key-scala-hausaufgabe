@@ -12,7 +12,9 @@ libraryDependencies ++= Seq(
   "com.softwaremill.sttp.client3" %% "core" % "3.8.15",
   "com.softwaremill.sttp.client3" %% "play-json" % "3.8.15",
   "com.typesafe.play" %% "play-json" % "2.10.0",
-  "org.apache.pekko" %% "pekko-stream" % "1.0.2",
+  "org.apache.pekko" %% "pekko-stream" % "1.0.3",
+  "org.apache.pekko" %% "pekko-stream-testkit" % "1.0.3" % Test,
+  "org.apache.pekko" %% "pekko-testkit" % "1.0.3" % Test,
   "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
 )
 
