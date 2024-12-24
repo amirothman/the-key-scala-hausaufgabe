@@ -1,10 +1,15 @@
 # Programmieraufgabe
 
 > Aufgabe:
+> 
 > Erstelle ein Full Stack System Frontend / Backend mit folgender Aufgabestellung:
+> 
 > Das Backend ruft zyklisch (alle paar Sekunden) die Blogbeiträge von der Seite internate.org (alternativ thekey.academy) ab (über die Wordpress API - https://developer.wordpress.org/rest-api/reference/posts/)
+> 
 > Das Backend verarbeitet die Blogbeiträge zu einer einfachen Word Count Map ({“und”: 5, “der”: 3, ...})
+> 
 > Das Backend sendet nach der Verarbeitung die Map per WebSocket an das Frontend
+> 
 > Das Frontend zeigt die Word Count Map der neuen Beiträge an und aktualisiert sich selbstständig neu bei neuen Daten.
 
 ## Bedienungsanleitung
