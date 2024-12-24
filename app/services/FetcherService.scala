@@ -14,8 +14,6 @@ import play.api.Logger
 @Singleton
 class FetcherService @Inject()(implicit ec: ExecutionContext) {
   private val logger = Logger(this.getClass)
-  private val processedPostIds = scala.collection.mutable.Set[Int]()
-
   private val defaultBackend = HttpURLConnectionBackend()
 
   def fetchPosts(apiUrl: String, customBackend: Option[SttpBackend[Identity, Any]] = None): Future[List[BlogPost]] = {
@@ -31,10 +29,8 @@ class FetcherService @Inject()(implicit ec: ExecutionContext) {
     response.body match {
       case Right(json) =>
         val posts = Json.parse(json).as[List[BlogPost]]
-        val newPosts = posts.filterNot(post => processedPostIds.contains(post.id))
-        processedPostIds ++= newPosts.map(_.id)
-        logger.info(s"Found ${newPosts.length} new posts")
-        Future.successful(newPosts)
+        logger.info(s"Found ${posts.length} posts")
+        Future.successful(posts)
       case Left(error) =>
         logger.error(s"Failed to fetch posts: $error")
         Future.failed(new RuntimeException(s"Failed to fetch posts: $error"))
