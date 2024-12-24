@@ -13,7 +13,7 @@ import scala.concurrent.Future
 class BlogProcessingPipelineSpec extends AnyWordSpec with Matchers with ScalaFutures with MockitoSugar {
 
   "BlogProcessingPipeline" should {
-    "correctly accumulate word counts" in {
+    "correctly broadcast word counts" in {
       // Mock dependencies
       val fetcherService = mock[FetcherService]
       val processorService = mock[ProcessorService]

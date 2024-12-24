@@ -13,9 +13,6 @@ class BlogProcessingPipeline @Inject() (
 )(implicit ec: ExecutionContext)
     extends Logging {
 
-  // Maintain accumulated word counts
-  private var accumulatedWordCount = WordCountMap(Map.empty[String, Int])
-
   /**
    * Executes the pipeline: fetch -> process -> broadcast.
    * @param apiUrl The WordPress API URL to fetch posts from.
@@ -24,23 +21,16 @@ class BlogProcessingPipeline @Inject() (
     for {
       posts <- fetcher.fetchPosts(apiUrl)
       newWordCount = processor.process(posts)
-      _ = updateAndBroadcastWordCount(newWordCount)
+      _ = broadcastWordCount(newWordCount)
     } yield {
       logger.info("Pipeline executed successfully")
     }
   }
 
   /**
-   * Updates the accumulated word count by merging with new counts and broadcasts the result.
+   * Broadcasts the new word count.
    */
-  private def updateAndBroadcastWordCount(newWordCount: WordCountMap): Unit = {
-    // Merge new word counts with accumulated counts
-    val mergedCounts = newWordCount.data.foldLeft(accumulatedWordCount.data) {
-      case (counts, (word, count)) =>
-        counts.updated(word, counts.getOrElse(word, 0) + count)
-    }
-    
-    accumulatedWordCount = WordCountMap(mergedCounts)
-    broadcaster.broadcastWordCount(accumulatedWordCount)
+  private def broadcastWordCount(newWordCount: WordCountMap): Unit = {
+    broadcaster.broadcastWordCount(newWordCount)
   }
 }
