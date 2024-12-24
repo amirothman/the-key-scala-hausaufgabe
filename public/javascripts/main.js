@@ -2,8 +2,8 @@ const socket = new WebSocket(`ws://${window.location.host}/ws/wordCount`);
 const status = document.getElementById('status');
 const tableBody = document.querySelector('#word-count-table tbody');
 
-socket.onopen = () => (status.textContent = 'Status: Connected');
-socket.onclose = () => (status.textContent = 'Status: Disconnected');
+socket.onopen = () => (status.textContent = 'Websocket Status: Connected');
+socket.onclose = () => (status.textContent = 'Websocket Status: Disconnected');
 socket.onmessage = (event) => {
   const wordCounts = JSON.parse(event.data);
   tableBody.innerHTML = '';
