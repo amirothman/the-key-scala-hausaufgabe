@@ -54,7 +54,7 @@ class WebSocketBroadcasterSpec extends PlaySpec with ScalaFutures with Matchers 
       broadcaster.broadcastWordCount(WordCountMap(Map("second" -> 2)))
 
       // Allow time for processing
-      Thread.sleep(500)
+      Thread.sleep(1000)
 
       messages.size must be(2)
       messages.head must include("first")
