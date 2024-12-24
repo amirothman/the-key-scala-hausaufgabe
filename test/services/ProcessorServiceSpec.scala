@@ -9,8 +9,8 @@ class ProcessorServiceSpec extends PlaySpec with Matchers {
     "generate a correct word count map" in {
       val service = new ProcessorService()
       val blogPosts = List(
-        BlogPost("1", "Hello world! Hello again."),
-        BlogPost("2", "Scala is great.")
+        BlogPost(1, "Hello world! Hello again."),
+        BlogPost(2, "Scala is great.")
       )
 
       val result = service.process(blogPosts)
@@ -28,8 +28,8 @@ class ProcessorServiceSpec extends PlaySpec with Matchers {
     "handle empty content" in {
       val service = new ProcessorService()
       val blogPosts = List(
-        BlogPost("1", ""),
-        BlogPost("2", "   ")
+        BlogPost(1, ""),
+        BlogPost(2, "   ")
       )
 
       val result = service.process(blogPosts)
@@ -39,8 +39,8 @@ class ProcessorServiceSpec extends PlaySpec with Matchers {
     "handle special characters and multiple spaces" in {
       val service = new ProcessorService()
       val blogPosts = List(
-        BlogPost("1", "Hello,    world! @#$%"),
-        BlogPost("2", "Hello... World!!!")
+        BlogPost(1, "Hello,    world! @#$%"),
+        BlogPost(2, "Hello... World!!!")
       )
 
       val result = service.process(blogPosts)

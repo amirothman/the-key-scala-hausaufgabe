@@ -20,7 +20,7 @@ class BlogProcessingPipelineSpec extends PlaySpec with GuiceOneAppPerSuite {
       val mockBroadcaster = mock[WebSocketBroadcaster](classOf[WebSocketBroadcaster])
 
       // Mock behavior
-      val mockPosts = List(BlogPost("1", "This is a test post."))
+      val mockPosts = List(BlogPost(1, "This is a test post."))
       val mockWordCount = WordCountMap(Map("this" -> 1, "is" -> 1, "a" -> 1, "test" -> 1, "post" -> 1))
 
       when(mockFetcher.fetchPosts(anyString())).thenReturn(Future.successful(mockPosts))

@@ -12,7 +12,7 @@ import scala.util.Try
 
 @Singleton
 class FetcherService @Inject()(implicit ec: ExecutionContext) {
-  private val processedPostIds = scala.collection.mutable.Set[String]()
+  private val processedPostIds = scala.collection.mutable.Set[Int]()
 
   private val defaultBackend = HttpURLConnectionBackend()
 

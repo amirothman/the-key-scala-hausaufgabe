@@ -17,13 +17,13 @@ class FetcherServiceSpec extends PlaySpec with ScalaFutures with Matchers {
       val mockAPIResponse: String = """
       [
         {
-          "id": "1",
+          "id": 1,
           "content": {
             "rendered": "First post"
           }
         },
         {
-          "id": "2",
+          "id": 2,
           "content": {
             "rendered": "Second post"
           }
@@ -40,8 +40,8 @@ class FetcherServiceSpec extends PlaySpec with ScalaFutures with Matchers {
 
       val posts = service.fetchPosts(apiUrl, Some(mockBackend)).futureValue
       posts must contain theSameElementsAs(List(
-        BlogPost("1", "First post"),
-        BlogPost("2", "Second post")
+        BlogPost(1, "First post"),
+        BlogPost(2, "Second post")
       ))
 
       // Test that duplicate posts are filtered out

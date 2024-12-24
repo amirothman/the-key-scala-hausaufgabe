@@ -32,13 +32,13 @@ class EndToEndSpec extends PlaySpec with GuiceOneAppPerSuite with ScalaFutures w
         """
         [
           {
-            "id": "1",
+            "id": 1,
             "content": {
               "rendered": "Hello world! Hello again."
             }
           },
           {
-            "id": "2",
+            "id": 2,
             "content": {
               "rendered": "Scala is great!"
             }
@@ -60,8 +60,8 @@ class EndToEndSpec extends PlaySpec with GuiceOneAppPerSuite with ScalaFutures w
       // Execute the pipeline
       val posts = fetcher.fetchPosts(apiUrl, Some(mockBackend)).futureValue
       posts must contain theSameElementsAs List(
-        BlogPost("1", "Hello world! Hello again."),
-        BlogPost("2", "Scala is great!")
+        BlogPost(1, "Hello world! Hello again."),
+        BlogPost(2, "Scala is great!")
       )
 
       val wordCount = processor.process(posts)
