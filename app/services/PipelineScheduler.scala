@@ -18,8 +18,11 @@ class PipelineScheduler @Inject() (
   private val apiUrl = config.get[String]("wordpress.api.url")
   private val interval = config.get[Int]("scheduler.interval").seconds
 
+  logger.info(s"Starting PipelineScheduler with interval: $interval seconds")
+
   // Schedule the pipeline to run periodically
   actorSystem.scheduler.scheduleWithFixedDelay(initialDelay = 0.seconds, delay = interval) { () =>
+    logger.info(s"Triggering blogPipeline execution at ${java.time.Instant.now}")
     blogPipeline.execute(apiUrl).recover {
       case ex: Exception =>
         logger.error("Pipeline execution failed", ex)
